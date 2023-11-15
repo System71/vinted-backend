@@ -5,12 +5,12 @@ const userRoutes = require("./routes/user");
 const offerRoutes = require("./routes/offer");
 const cloudinary = require("cloudinary").v2;
 
-mongoose.connect("mongodb://127.0.0.1:27017/vinted");
+mongoose.connect(process.env.MONGODB_URI);
 
 cloudinary.config({
-  cloud_name: "dhtlqg150",
-  api_key: "277995154599981",
-  api_secret: "Utl17XWUUB3rEoMIZwlGoqelIMQ",
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 app.use(express.json());
@@ -21,6 +21,6 @@ app.all("*", (req, res) => {
   res.status(404).json({ message: "Page not found" });
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
   console.log("Server has started");
 });
