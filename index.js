@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/user");
@@ -14,6 +15,7 @@ cloudinary.config({
 });
 
 app.use(express.json());
+app.use(cors());
 app.use(userRoutes);
 app.use(offerRoutes);
 
