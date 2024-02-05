@@ -1,9 +1,11 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
 const mongoose = require("mongoose");
 const userRoutes = require("./routes/user");
 const offerRoutes = require("./routes/offer");
+const paymentRoutes = require("./routes/payment");
 const cloudinary = require("cloudinary").v2;
 
 mongoose.connect(process.env.MONGODB_URI);
@@ -18,6 +20,7 @@ app.use(express.json());
 app.use(cors());
 app.use(userRoutes);
 app.use(offerRoutes);
+app.use(paymentRoutes);
 
 app.all("*", (req, res) => {
   res.status(404).json({ message: "Page not found" });
